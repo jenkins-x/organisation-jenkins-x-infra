@@ -15,6 +15,8 @@ function install_dependencies() {
  	tar xvf helm-v${HELM_VERSION}-linux-amd64.tar.gz	
  	rm helm-v${HELM_VERSION}-linux-amd64.tar.gz	
  	mv linux-amd64/helm ~/.jx/bin
+	
+	~/.jx/bin/helm init --client-only
 }
 
 function configure_environment() {
