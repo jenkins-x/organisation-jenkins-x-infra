@@ -37,8 +37,15 @@ function apply() {
 	IFS=$OLDIFS
 
 	git status
+
 	
-	./jx create terraform --verbose ${CLUSTER_COMMAND} -b --install-dependencies -o ${ORG} --gke-service-account ${SA}
+	if [[ "${CI_BRANCH}" == "master" ]]; then
+		echo "Running master build"
+		./jx create terraform --verbose ${CLUSTER_COMMAND} -b --install-dependencies -o ${ORG} --gke-service-account ${SA}
+	else
+		echo "Running PR build for ${CI_BRANCH}"
+		./jx create terraform --verbose ${CLUSTER_COMMAND} -b --install-dependencies -o ${ORG} --gke-service-account ${SA} --skip-terraform-apply --local-organisation-repository .
+	fi
 }
 
 install_dependencies
