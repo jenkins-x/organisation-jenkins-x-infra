@@ -8,6 +8,7 @@ HELM_VERSION=2.9.1
 function install_dependencies() {
 	wget https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz
 	tar xvf jx-linux-amd64.tar.gz
+	rm jx-linux-amd64.tar.gz
 
 	mkdir -p ~/.jx/bin
 
@@ -15,6 +16,7 @@ function install_dependencies() {
  	tar xvf helm-v${HELM_VERSION}-linux-amd64.tar.gz	
  	rm helm-v${HELM_VERSION}-linux-amd64.tar.gz	
  	mv linux-amd64/helm ~/.jx/bin
+	rm -fr linux-amd64
 	
 	~/.jx/bin/helm init --client-only
 }
